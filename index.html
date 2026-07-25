@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CardAgain — Keep the cards you cherish</title>
+  <meta name="description" content="CardAgain helps you preserve your most meaningful greeting cards forever — capture them, hear them read aloud in a loved one's voice, and never forget a special occasion.">
+
+  <!-- Open Graph / social preview -->
+  <meta property="og:title" content="CardAgain — Keep the cards you cherish">
+  <meta property="og:description" content="Preserve your greeting cards, hear them read aloud in a loved one's voice, and never miss an occasion.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://cardagain.me">
+  <meta property="og:image" content="https://cardagain.me/share/icon.png">
+  <meta name="theme-color" content="#FAF7F2">
+
+  <link rel="icon" href="share/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #FAF7F2;
+      --bg-soft: #FFF9F0;
+      --surface: #FFFFFF;
+      --gold: #D4A574;
+      --gold-deep: #C4956A;
+      --gold-soft: #E8D5B7;
+      --ink: #2D2D2D;
+      --muted: #7A7A7A;
+      --brown: #8B7355;
+      --border: #F0EBE3;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Nav ---------- */
+    nav {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(250,247,242,0.85);
+      backdrop-filter: saturate(180%) blur(12px);
+      -webkit-backdrop-filter: saturate(180%) blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; max-width: 1080px; margin: 0 auto; }
+    .nav-brand { display: flex; align-items: center; gap: 10px; }
+    .nav-brand img { width: 34px; height: 34px; border-radius: 9px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+    .nav-brand span { font-family: 'Dancing Script', cursive; font-size: 26px; font-weight: 700; color: var(--gold-deep); }
+    .nav-cta {
+      background: var(--gold); color: #fff; font-weight: 600; font-size: 14px;
+      padding: 9px 20px; border-radius: 10px; text-decoration: none;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .nav-cta:hover { background: var(--gold-deep); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(212,165,116,.35); }
+
+    /* ---------- Hero ---------- */
+    .hero { position: relative; text-align: center; padding: 84px 0 72px; }
+    .hero-glow {
+      position: absolute; inset: 0; z-index: -1;
+      background:
+        radial-gradient(60% 50% at 50% 0%, rgba(212,165,116,0.16), transparent 70%),
+        radial-gradient(40% 40% at 80% 30%, rgba(232,213,183,0.25), transparent 70%);
+    }
+    .hero .eyebrow {
+      display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--brown);
+      background: var(--bg-soft); border: 1px solid var(--gold-soft);
+      padding: 7px 16px; border-radius: 999px; margin-bottom: 26px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif; font-weight: 600;
+      font-size: clamp(38px, 6vw, 66px); line-height: 1.1; letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    .hero h1 .script {
+      display: block; font-family: 'Dancing Script', cursive; font-weight: 700;
+      color: var(--gold-deep); font-size: clamp(46px, 7vw, 82px); line-height: 1.15; padding-bottom: 6px;
+    }
+    .hero p.lead {
+      font-size: clamp(17px, 2.2vw, 21px); color: var(--muted);
+      max-width: 600px; margin: 18px auto 34px;
+    }
+    .cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 16px; font-weight: 600; padding: 15px 30px; border-radius: 14px;
+      text-decoration: none; cursor: pointer; border: none;
+      transition: transform .2s, box-shadow .2s, background .2s;
+    }
+    .btn-primary { background: var(--gold); color: #fff; box-shadow: 0 6px 20px rgba(212,165,116,.3); }
+    .btn-primary:hover { background: var(--gold-deep); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(212,165,116,.42); }
+    .btn-ghost { background: var(--surface); color: var(--brown); border: 2px solid var(--gold-soft); }
+    .btn-ghost:hover { background: var(--bg-soft); transform: translateY(-2px); }
+    .hero-note { margin-top: 16px; font-size: 13px; color: #aa9; }
+
+    /* ---------- Mock card showcase ---------- */
+    .showcase { display: flex; justify-content: center; margin-top: 56px; }
+    .phone {
+      width: 300px; max-width: 86vw; background: var(--surface);
+      border-radius: 28px; padding: 22px; border: 1px solid var(--border);
+      box-shadow: 0 24px 60px rgba(141,115,85,0.18); text-align: left;
+      transform: rotate(-1.5deg);
+    }
+    .phone .greet-small { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: var(--ink); }
+    .phone .greet-name { font-family: 'Dancing Script', cursive; font-weight: 700; font-size: 34px; color: var(--gold-deep); line-height: 1.3; padding-bottom: 4px; margin-bottom: 14px; }
+    .mock-card { border-radius: 18px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 6px 18px rgba(0,0,0,0.05); }
+    .mock-photo {
+      height: 150px;
+      background: linear-gradient(135deg, #E8D5B7, #D4A574 60%, #C4956A);
+      display: flex; align-items: center; justify-content: center; font-size: 46px;
+    }
+    .mock-body { padding: 16px; }
+    .mock-title { font-weight: 600; font-size: 18px; margin-bottom: 8px; }
+    .mock-row { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .mock-label { font-style: italic; font-weight: 600; font-size: 13px; color: var(--ink); }
+    .pill { background: var(--bg-soft); border: 1px solid var(--gold-soft); color: var(--brown); font-size: 12px; font-weight: 500; padding: 4px 12px; border-radius: 999px; }
+    .pill.gold { background: #F6ECDD; }
+    .mock-actions { display: flex; gap: 8px; margin-top: 4px; }
+    .dot-btn { width: 34px; height: 34px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 15px; }
+
+    /* ---------- Sections ---------- */
+    section.block { padding: 72px 0; }
+    .section-head { text-align: center; max-width: 640px; margin: 0 auto 48px; }
+    .section-head .tag { font-size: 13px; font-weight: 600; letter-spacing: 1.4px; text-transform: uppercase; color: var(--gold-deep); }
+    .section-head h2 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: clamp(28px, 4vw, 40px); margin: 10px 0 12px; letter-spacing: -0.3px; }
+    .section-head p { color: var(--muted); font-size: 17px; }
+
+    .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 22px; }
+    .feature {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 20px;
+      padding: 30px 26px; transition: transform .25s, box-shadow .25s;
+    }
+    .feature:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(141,115,85,0.12); }
+    .feature .ic {
+      width: 54px; height: 54px; border-radius: 15px; display: flex; align-items: center; justify-content: center;
+      font-size: 26px; margin-bottom: 18px; background: var(--bg-soft); border: 1px solid var(--gold-soft);
+    }
+    .feature h3 { font-size: 19px; font-weight: 600; margin-bottom: 8px; }
+    .feature p { color: var(--muted); font-size: 15px; }
+
+    /* ---------- Steps ---------- */
+    .steps-wrap { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; }
+    .step { text-align: center; }
+    .step .num {
+      width: 48px; height: 48px; border-radius: 50%; margin: 0 auto 16px;
+      background: var(--gold); color: #fff; font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 16px rgba(212,165,116,.32);
+    }
+    .step h3 { font-size: 18px; font-weight: 600; margin-bottom: 6px; }
+    .step p { color: var(--muted); font-size: 15px; }
+
+    /* ---------- Final CTA ---------- */
+    .final { text-align: center; padding: 90px 0; }
+    .final-card {
+      background: linear-gradient(160deg, #FFFFFF, #FFF9F0);
+      border: 1px solid var(--gold-soft); border-radius: 28px;
+      padding: 56px 32px; box-shadow: 0 20px 50px rgba(141,115,85,0.12);
+    }
+    .final h2 { font-family: 'Playfair Display', serif; font-weight: 600; font-size: clamp(28px, 4.5vw, 44px); margin-bottom: 12px; }
+    .final h2 .script { font-family: 'Dancing Script', cursive; color: var(--gold-deep); }
+    .final p { color: var(--muted); font-size: 18px; max-width: 480px; margin: 0 auto 30px; }
+
+    /* ---------- Footer ---------- */
+    footer { border-top: 1px solid var(--border); padding: 40px 0; text-align: center; }
+    .foot-brand { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 12px; }
+    .foot-brand img { width: 30px; height: 30px; border-radius: 8px; }
+    .foot-brand span { font-family: 'Dancing Script', cursive; font-size: 24px; font-weight: 700; color: var(--gold-deep); }
+    .foot-links { display: flex; gap: 22px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
+    .foot-links a { color: var(--brown); text-decoration: none; font-size: 14px; font-weight: 500; }
+    .foot-links a:hover { color: var(--gold-deep); }
+    .foot-copy { color: #aaa; font-size: 13px; }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <img src="share/icon.png" alt="CardAgain logo">
+        <span>CardAgain</span>
+      </div>
+      <a class="nav-cta" href="#get">Get the App</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-glow"></div>
+    <div class="wrap">
+      <span class="eyebrow">Every card holds a memory</span>
+      <h1>
+        Keep the cards
+        <span class="script">you cherish, forever</span>
+      </h1>
+      <p class="lead">
+        CardAgain turns the greeting cards you treasure into a living keepsake —
+        capture them, hear them read aloud in a loved one's voice, and never forget a special occasion.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" id="appstore" href="#get"> Download on the App Store</a>
+        <a class="btn btn-ghost" href="#features">See how it works</a>
+      </div>
+      <p class="hero-note">Made with love for the moments that matter.</p>
+
+      <!-- Showcase -->
+      <div class="showcase reveal">
+        <div class="phone">
+          <div class="greet-small">Good evening</div>
+          <div class="greet-name">Roy</div>
+          <div class="mock-card">
+            <div class="mock-photo">💌</div>
+            <div class="mock-body">
+              <div class="mock-title">Happy Birthday, sweetheart</div>
+              <div class="mock-row">
+                <span class="mock-label">From</span>
+                <span class="pill">Mom</span>
+              </div>
+              <div class="mock-row">
+                <span class="mock-label">Occasion</span>
+                <span class="pill gold">Birthday</span>
+              </div>
+              <div class="mock-actions">
+                <div class="dot-btn">🎤</div>
+                <div class="dot-btn">✨</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features -->
+  <section class="block" id="features">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="tag">Why you'll love it</div>
+        <h2>A warm home for your memories</h2>
+        <p>The cards on your shelf fade and get tucked away. CardAgain keeps them close — and brings them to life.</p>
+      </div>
+      <div class="features">
+        <div class="feature reveal">
+          <div class="ic">📸</div>
+          <h3>Capture &amp; preserve</h3>
+          <p>Snap photos of your cards and keep them organized by sender, occasion, and date — beautifully, in one place.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic">✨</div>
+          <h3>Hear it in their voice</h3>
+          <p>Add a short voice sample and let AI read your card aloud in a loved one's voice. A keepsake you can listen to.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic">🎤</div>
+          <h3>Record your own</h3>
+          <p>Attach a personal voice message to any card, so the feeling behind it is never lost.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic">📅</div>
+          <h3>Never miss an occasion</h3>
+          <p>Birthdays, anniversaries, holidays — your cards sync with the dates that matter so you always remember.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic">💝</div>
+          <h3>Share the love</h3>
+          <p>Send a card to someone special with a simple link — they can keep their own copy forever.</p>
+        </div>
+        <div class="feature reveal">
+          <div class="ic">🔒</div>
+          <h3>Private &amp; secure</h3>
+          <p>Your memories are yours. Everything is stored securely and synced safely across your devices.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <div class="steps-wrap">
+    <section class="block">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="tag">Simple by design</div>
+          <h2>Three steps to forever</h2>
+        </div>
+        <div class="steps">
+          <div class="step reveal">
+            <div class="num">1</div>
+            <h3>Snap the card</h3>
+            <p>Take a photo of a card you want to keep and add a few details.</p>
+          </div>
+          <div class="step reveal">
+            <div class="num">2</div>
+            <h3>Add a voice</h3>
+            <p>Record your own message or let AI read it in a loved one's voice.</p>
+          </div>
+          <div class="step reveal">
+            <div class="num">3</div>
+            <h3>Treasure it</h3>
+            <p>Revisit your cards anytime, and never forget the occasions behind them.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Final CTA -->
+  <section class="final" id="get">
+    <div class="wrap">
+      <div class="final-card reveal">
+        <h2>Start your <span class="script">collection</span> today</h2>
+        <p>Keep the cards you love close to your heart — and hear them speak again.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" id="appstore2" href="#"> Download on the App Store</a>
+        </div>
+        <p class="hero-note" id="comingSoon" style="display:none;">Coming soon to the App Store.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div class="foot-brand">
+        <img src="share/icon.png" alt="CardAgain logo">
+        <span>CardAgain</span>
+      </div>
+      <div class="foot-links">
+        <a href="mailto:support@cardagain.me">Contact</a>
+        <a href="#features">Features</a>
+        <a href="#get">Get the App</a>
+      </div>
+      <p class="foot-copy">© <span id="year"></span> CardAgain · Made with care for the moments that matter.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Update this once the app is live on the App Store.
+    var APP_STORE_URL = 'https://apps.apple.com/app/cardagain/id__YOUR_APP_STORE_ID__';
+    var PUBLISHED = false; // set true once APP_STORE_URL is real
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    var storeLinks = [document.getElementById('appstore'), document.getElementById('appstore2'), document.querySelector('.nav-cta')];
+    if (PUBLISHED) {
+      storeLinks.forEach(function (el) { if (el) el.setAttribute('href', APP_STORE_URL); });
+    } else {
+      // Until published, the primary buttons gently note it's coming soon.
+      var soon = document.getElementById('comingSoon');
+      [document.getElementById('appstore2')].forEach(function (el) {
+        if (!el) return;
+        el.addEventListener('click', function (e) {
+          e.preventDefault();
+          if (soon) soon.style.display = 'block';
+        });
+      });
+    }
+
+    // Scroll reveal
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+  </script>
+</body>
+</html>
