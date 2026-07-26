@@ -70,7 +70,10 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     .status { font-size: 14px; color: #8B7355; margin-top: 8px; display: none; }
-    .brand { margin-top: 24px; font-size: 13px; color: #999999; letter-spacing: 0.5px; }
+    .brand { margin-top: 24px; font-size: 13px; letter-spacing: 0.5px; }
+    .brand a { color: #8B7355; text-decoration: none; font-weight: 600; border-bottom: 1px solid #E8D5B7; padding-bottom: 1px; transition: color 0.2s; }
+    .brand a:hover { color: #C4956A; }
+    .brand .tagline { display: block; color: #999999; font-weight: 400; margin-top: 6px; }
   </style>
 </head>
 <body>
@@ -82,7 +85,10 @@
     <p class="status" id="status">Opening CardAgain...</p>
     <button class="btn" id="openBtn" onclick="openApp()">Open in CardAgain</button>
     <a class="btn-secondary" id="storeBtn" href="#" style="display:none;">Download CardAgain</a>
-    <p class="brand">CardAgain</p>
+    <p class="brand">
+      <a href="https://cardagain.me">Discover CardAgain</a>
+      <span class="tagline">Preserve your cards &amp; hear them in a loved one's voice with AI</span>
+    </p>
   </div>
 
   <script>
