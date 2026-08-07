@@ -20,22 +20,26 @@
 
   <style>
     :root {
-      --bg: #FAF7F2;
-      --bg-soft: #FFF9F0;
+      --bg: #FAF5EE;
+      --bg-soft: #FFF8EC;
       --surface: #FFFFFF;
       --gold: #D4A574;
       --gold-deep: #B98A5E;
       --gold-soft: #E8D5B7;
       --ink: #2B2724;
-      --muted: #6F6862;
+      --muted: #7A6F63;
       --brown: #8B7355;
-      --border: #ECE5DA;
+      --border: #EBE1D3;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg);
+      background:
+        radial-gradient(900px 480px at 88% -120px, rgba(212,165,116,0.20), transparent 65%),
+        radial-gradient(760px 460px at -8% 34%, rgba(232,213,183,0.30), transparent 62%),
+        radial-gradient(820px 480px at 55% 108%, rgba(212,165,116,0.14), transparent 60%),
+        var(--bg);
       color: var(--ink);
       line-height: 1.65;
       -webkit-font-smoothing: antialiased;
@@ -58,10 +62,10 @@
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 500; }
     .nav-links a:hover { color: var(--ink); }
     .nav-cta {
-      color: var(--ink) !important; border: 1px solid var(--ink); border-radius: 8px;
-      padding: 7px 16px; transition: background .2s, color .2s;
+      color: #fff !important; background: var(--gold); border-radius: 999px;
+      padding: 8px 18px; transition: background .2s, box-shadow .2s;
     }
-    .nav-cta:hover { background: var(--ink); color: var(--bg) !important; }
+    .nav-cta:hover { background: var(--gold-deep); box-shadow: 0 4px 14px rgba(212,165,116,.35); }
     @media (max-width: 640px) { .nav-links a:not(.nav-cta) { display: none; } }
 
     /* ---------- Hero ---------- */
@@ -72,7 +76,11 @@
       font-family: 'Playfair Display', serif; font-weight: 500;
       font-size: clamp(38px, 5.2vw, 58px); line-height: 1.14; letter-spacing: -0.5px;
     }
-    .hero h1 em { font-style: italic; color: var(--gold-deep); }
+    .hero h1 .script {
+      display: block; font-family: 'Dancing Script', cursive; font-weight: 700;
+      color: var(--gold-deep); font-size: clamp(46px, 6.4vw, 72px);
+      line-height: 1.35; padding-bottom: 10px;
+    }
     .hero p.lead {
       font-size: clamp(16px, 2vw, 18px); color: var(--muted);
       max-width: 500px; margin: 22px 0 34px;
@@ -96,12 +104,19 @@
     .hero-note { margin-top: 18px; font-size: 13px; color: #9A9088; }
 
     /* ---------- Phone demo ---------- */
-    .demo-stage { display: flex; justify-content: center; }
+    .demo-stage { display: flex; justify-content: center; position: relative; }
+    .demo-stage::before {
+      content: ''; position: absolute; width: 480px; height: 480px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,165,116,0.26), transparent 68%);
+      top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none;
+    }
     .phone {
       position: relative; width: 296px; max-width: 84vw; height: 600px;
       background: #1c1c1e; border-radius: 44px; padding: 12px;
-      box-shadow: 0 24px 60px rgba(101,82,63,0.22);
+      box-shadow: 0 24px 60px rgba(101,82,63,0.26);
+      animation: phoneFloat 7s ease-in-out infinite;
     }
+    @keyframes phoneFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
     .phone .notch { position: absolute; top: 12px; left: 50%; transform: translateX(-50%); width: 116px; height: 25px; background: #1c1c1e; border-radius: 0 0 15px 15px; z-index: 5; }
     .screen {
       width: 100%; height: 100%; background: var(--bg); border-radius: 34px; overflow: hidden;
@@ -154,12 +169,14 @@
 
     .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
     .feature {
-      background: var(--surface); border: 1px solid var(--border); border-radius: 16px;
+      background: var(--surface); border: 1px solid var(--border); border-radius: 18px;
       padding: 30px 28px;
+      transition: transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s, border-color .3s;
     }
+    .feature:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(141,115,85,0.14); border-color: var(--gold-soft); }
     .feature .ic {
-      width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-      margin-bottom: 18px; background: var(--bg-soft); border: 1px solid var(--gold-soft);
+      width: 46px; height: 46px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px; background: linear-gradient(150deg, var(--bg-soft), #F4E7D2); border: 1px solid var(--gold-soft);
     }
     .feature .ic svg { width: 21px; height: 21px; stroke: var(--gold-deep); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
     .feature h3 { font-size: 17px; font-weight: 600; margin-bottom: 7px; }
@@ -170,15 +187,32 @@
     .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 36px; max-width: 900px; margin: 0 auto; }
     .step { text-align: center; }
     .step .num {
-      font-family: 'Playfair Display', serif; font-size: 15px; font-weight: 600;
-      color: var(--gold-deep); letter-spacing: 2px; margin-bottom: 10px;
+      width: 46px; height: 46px; border-radius: 50%; margin: 0 auto 16px;
+      background: var(--gold); color: #fff; font-family: 'Playfair Display', serif;
+      font-size: 19px; font-weight: 600; display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 16px rgba(212,165,116,.30);
     }
     .step h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
     .step p { color: var(--muted); font-size: 14.5px; max-width: 260px; margin: 0 auto; }
 
+    /* ---------- Pull quote ---------- */
+    .quote { padding: 88px 0; text-align: center; }
+    .quote .mark { font-family: 'Playfair Display', serif; font-size: 64px; line-height: 0.6; color: var(--gold-soft); display: block; margin-bottom: 18px; }
+    .quote p {
+      font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
+      font-size: clamp(21px, 3vw, 29px); line-height: 1.5; color: var(--brown);
+      max-width: 640px; margin: 0 auto;
+    }
+
     /* ---------- Final CTA ---------- */
-    .final { text-align: center; padding: 96px 0; }
+    .final { text-align: center; padding: 40px 0 96px; }
+    .final-card {
+      background: linear-gradient(165deg, #FFFFFF, var(--bg-soft));
+      border: 1px solid var(--gold-soft); border-radius: 26px;
+      padding: 60px 32px; box-shadow: 0 22px 50px rgba(141,115,85,0.12);
+    }
     .final h2 { font-family: 'Playfair Display', serif; font-weight: 500; font-size: clamp(28px, 4.2vw, 40px); margin-bottom: 14px; letter-spacing: -0.3px; }
+    .final h2 .script { font-family: 'Dancing Script', cursive; font-weight: 700; color: var(--gold-deep); }
     .final p { color: var(--muted); font-size: 17px; max-width: 460px; margin: 0 auto 32px; }
 
     /* ---------- Footer ---------- */
@@ -197,7 +231,7 @@
     .reveal.in { opacity: 1; transform: none; }
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity: 1 !important; transform: none !important; }
-      .wave span { animation: none !important; }
+      .wave span, .phone { animation: none !important; }
     }
   </style>
 </head>
@@ -222,11 +256,11 @@
     <div class="wrap">
       <div class="hero-grid">
         <div class="hero-copy">
-          <h1>The cards you cherish, <em>kept for good</em></h1>
+          <h1>The cards you cherish, <span class="script">kept for good</span></h1>
           <p class="lead">
-            Greeting cards carry handwriting, voices, and moments worth keeping.
-            CardAgain preserves them in one place, and can read each one aloud
-            in a voice you know, recreated from a short recording.
+            A birthday card in Mom's handwriting. A note tucked into flowers.
+            CardAgain keeps them safe in one place, and can read each one aloud
+            in a voice you love, recreated from a short recording.
           </p>
           <div class="cta-row">
             <a class="store-badge" id="appstore" href="#get" aria-label="Download CardAgain on the App Store">
@@ -352,6 +386,14 @@
     </div>
   </section>
 
+  <!-- Pull quote -->
+  <section class="quote">
+    <div class="wrap reveal">
+      <span class="mark" aria-hidden="true">&ldquo;</span>
+      <p>Her handwriting on the envelope, her voice reading it back, the date she pressed it into my hand — all of it, still here.</p>
+    </div>
+  </section>
+
   <!-- Steps -->
   <div class="steps-wrap" id="how">
     <section class="block">
@@ -372,8 +414,8 @@
   <!-- Final CTA -->
   <section class="final" id="get">
     <div class="wrap">
-      <div class="reveal">
-        <h2>Start keeping what matters</h2>
+      <div class="final-card reveal">
+        <h2>Start your <span class="script">collection</span> today</h2>
         <p>The next card you're given doesn't have to end up in a drawer.</p>
         <div class="cta-row" style="justify-content:center;">
           <a class="store-badge" id="appstore2" href="#" aria-label="Download CardAgain on the App Store">
