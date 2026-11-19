@@ -243,6 +243,33 @@
     .keeps .private { grid-column: 1 / -1; }
     .keeps .private a { color: var(--kraft-deep); text-underline-offset: 4px; text-decoration-thickness: 1px; white-space: nowrap; }
 
+    /* ---------- New Year event ----------
+       A seasonal section. data-event is "soon" in the markup and switched
+       to "live" or "ended" by script, so nothing points at a card that
+       does not exist yet. The QR sits on a paper card: paper keeps its own
+       colours in both themes, which also keeps the code scannable. */
+    .event {
+      display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: center;
+      padding: 64px 0 72px; border-top: 1px dashed var(--line-strong);
+    }
+    .event[data-event="ended"] { display: none; }
+    .event-dates { color: var(--kraft-deep); font-weight: 600; font-size: 0.95rem; margin-bottom: 14px; }
+    .event p.event-lead { color: var(--ink-2); margin: 18px 0 28px; max-width: 30em; }
+    .event-actions { display: flex; align-items: center; gap: 14px 24px; flex-wrap: wrap; }
+    .btn-lg { padding: 13px 24px; font-size: 1rem; }
+    .event-fine { margin-top: 18px; font-size: 0.9rem; color: var(--ink-2); }
+    .qr-card {
+      justify-self: center; width: min(100%, 260px); background: var(--paper); color: #1D2433;
+      border-radius: 14px; padding: 22px 22px 18px; transform: rotate(2deg);
+      box-shadow: 0 1px 0 rgba(30, 22, 10, 0.06), 0 18px 40px -22px rgba(30, 22, 10, 0.55);
+      text-align: center;
+    }
+    .qr-card .qr { width: 100%; height: auto; }
+    .qr-card p { font-family: var(--serif); font-style: italic; font-size: 1.05rem; line-height: 1.3; margin-top: 14px; color: #565D6C; }
+    .qr-card .qr-soon { font-size: 1.5rem; color: #1D2433; padding: 64px 0 50px; margin: 0; }
+    [data-event="soon"] .ev-live, [data-event="ended"] .ev-live { display: none; }
+    [data-event="live"] .ev-soon, [data-event="ended"] .ev-soon { display: none; }
+
     /* ---------- Statement ---------- */
     .statement { padding: 8px 0 112px; }
     .statement p {
@@ -287,6 +314,8 @@
       .keeps { grid-template-columns: 1fr; gap: 40px; padding: 80px 0; }
       .keeps-intro { position: static; }
       .steps { grid-template-columns: 1fr; gap: 40px; }
+      .event { grid-template-columns: 1fr; gap: 40px; padding: 56px 0 64px; }
+      .qr-card { justify-self: start; }
       .final { grid-template-columns: 1fr; padding: 88px 0; }
       .final svg.keepsake { justify-self: start; width: 220px; }
     }
@@ -329,6 +358,7 @@
         <span>CardAgain</span>
       </a>
       <div class="nav-links">
+        <a href="newyear/">New Year Giveaway</a>
         <a href="#features">What it keeps</a>
         <a href="#how">How it works</a>
         <a href="support/">Support</a>
@@ -423,6 +453,31 @@
         <p class="demo-note">Tap a card, then press play. Silent preview: in the app, you hear it.</p>
       </div>
     </header>
+
+    <!-- New Year event -->
+    <section class="event" id="newyear" data-event="soon" aria-labelledby="event-title">
+      <div>
+        <p class="event-dates">New Year Giveaway · December 20 – January 20</p>
+        <h2 id="event-title">A New Year card from us, to keep and to pass on.</h2>
+        <p class="event-lead">
+          Add our New Year card to your CardAgain collection, then share it.
+          The four people who bring the most new friends to CardAgain each
+          receive a $25 Amazon gift card.
+        </p>
+        <div class="event-actions">
+          <a class="btn btn-lg ev-live" href="share/?code=NEWYEAR7">Add the New Year card</a>
+          <a class="link-quiet" href="newyear/">How it works and official rules</a>
+        </div>
+        <p class="event-fine">Free to enter. US residents, 18 and older.</p>
+      </div>
+      <div class="qr-card">
+        <div class="ev-live">
+          <svg class="qr" viewBox="0 0 29 29" shape-rendering="crispEdges" role="img" aria-label="QR code that adds the CardAgain New Year card"><path fill="#fff" d="M0 0h29v29H0z"/><path stroke="#1D2433" d="M0 0.5h7m3 0h4m1 0h6m1 0h7M0 1.5h1m5 0h1m3 0h1m1 0h2m1 0h1m2 0h1m1 0h1m1 0h1m5 0h1M0 2.5h1m1 0h3m1 0h1m1 0h1m6 0h1m2 0h2m2 0h1m1 0h3m1 0h1M0 3.5h1m1 0h3m1 0h1m1 0h3m1 0h1m3 0h2m2 0h1m1 0h1m1 0h3m1 0h1M0 4.5h1m1 0h3m1 0h1m1 0h2m2 0h1m5 0h3m1 0h1m1 0h3m1 0h1M0 5.5h1m5 0h1m1 0h1m1 0h4m2 0h1m1 0h1m1 0h1m1 0h1m5 0h1M0 6.5h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7M8 7.5h1m1 0h2m3 0h1m3 0h2M0 8.5h1m1 0h5m3 0h2m1 0h2m1 0h2m1 0h1m2 0h5M0 9.5h1m4 0h1m2 0h1m2 0h1m3 0h1m3 0h1m1 0h4m3 0h1M1 10.5h2m3 0h1m3 0h4m1 0h1m1 0h2m1 0h2m2 0h1M1 11.5h1m1 0h1m5 0h1m1 0h1m2 0h3m1 0h1m1 0h1m2 0h3m1 0h1M0 12.5h1m1 0h1m3 0h1m1 0h1m1 0h3m2 0h1m1 0h1m7 0h2M0 13.5h1m2 0h2m4 0h1m5 0h2m1 0h7m3 0h1M0 14.5h2m2 0h5m1 0h2m3 0h1m4 0h1m4 0h2M1 15.5h1m1 0h1m1 0h1m2 0h1m2 0h2m2 0h1m4 0h1m1 0h1m1 0h1m2 0h1M0 16.5h2m1 0h1m2 0h3m1 0h1m1 0h1m2 0h1m1 0h3m3 0h1m1 0h2M0 17.5h2m1 0h3m5 0h3m3 0h1m1 0h6m1 0h1m1 0h1M0 18.5h1m1 0h1m1 0h1m1 0h1m1 0h1m3 0h6m3 0h1m1 0h2m1 0h1M0 19.5h1m6 0h3m3 0h1m1 0h2m2 0h2m3 0h1m2 0h1M0 20.5h1m1 0h3m1 0h4m1 0h2m1 0h1m1 0h2m1 0h6m1 0h3M8 21.5h1m1 0h1m1 0h1m5 0h1m1 0h1m3 0h5M0 22.5h7m3 0h3m2 0h6m1 0h1m1 0h3M0 23.5h1m5 0h1m1 0h1m2 0h2m1 0h3m3 0h1m3 0h1m2 0h1M0 24.5h1m1 0h3m1 0h1m1 0h4m3 0h1m1 0h1m2 0h5m1 0h2M0 25.5h1m1 0h3m1 0h1m1 0h3m1 0h3m1 0h3m1 0h1m4 0h4M0 26.5h1m1 0h3m1 0h1m1 0h2m2 0h1m1 0h2m1 0h1m1 0h9M0 27.5h1m5 0h1m3 0h3m2 0h2m3 0h4m1 0h1m1 0h1M0 28.5h7m1 0h1m1 0h1m4 0h1m1 0h1m1 0h1m4 0h1m1 0h1"/></svg>
+          <p>Scan with your phone to add the card</p>
+        </div>
+        <p class="qr-soon ev-soon">Opens December&nbsp;20</p>
+      </div>
+    </section>
 
     <!-- What it keeps -->
     <section class="keeps" id="features">
@@ -526,6 +581,23 @@
       <p class="foot-copy">© <span id="year"></span> CardAgain. All rights reserved.</p>
     </div>
   </footer>
+
+  <script>
+    // The giveaway runs Dec 20, 2026 through Jan 20, 2027, Central Time.
+    // Before it opens the card does not exist yet, so the QR and button
+    // stay hidden; the markup's default state is "soon" for that reason.
+    (function () {
+      var start = Date.parse('2026-12-20T06:00:00Z');
+      var end = Date.parse('2027-01-21T06:00:00Z');
+      var now = Date.now();
+      var state = now < start ? 'soon' : now < end ? 'live' : 'ended';
+      // ?preview=live|ended|soon lets us check each state before launch.
+      var preview = new URLSearchParams(location.search).get('preview');
+      if (preview === 'soon' || preview === 'live' || preview === 'ended') state = preview;
+      var nodes = document.querySelectorAll('[data-event]');
+      for (var i = 0; i < nodes.length; i++) nodes[i].setAttribute('data-event', state);
+    })();
+  </script>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
